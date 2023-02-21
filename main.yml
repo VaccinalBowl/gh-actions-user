@@ -25,15 +25,32 @@ Resources:
       PolicyDocument: 
         Version: '2012-10-17'
         Statement:
-          - Effect: Allow
-            Action:
-              - s3:ListBucket
-              - s3:PutObject
-              - s3:PutObjectTagging
+          - Action:
+            - s3:*
+            Effect: Allow
             Resource:
-              - !Sub arn:aws:s3:::${AssetsBucket}
-              - !Sub arn:aws:s3:::${AssetsBucket}/*
-
+              - arn:aws:s3:::anki-lambda-artefacts
+              - arn:aws:s3:::anki-lambda-artefacts/*
+          - Action:
+            - cloudformation:*
+            Effect: Allow
+            Resource:
+              - '*'
+          - Action:
+            - iam:*
+            Effect: Allow
+            Resource:
+              - '*'
+          - Action:
+            - lambda:*
+            Effect: Allow
+            Resource:
+              - '*'
+          - Action:
+            - apigateway:*
+            Effect: Allow
+            Resource:
+              - '*'
   AssetsRole:
     Type: AWS::IAM::Role
     Properties:

@@ -29,29 +29,76 @@ Resources:
             - s3:*
             Effect: Allow
             Resource:
-              - arn:aws:s3:::anki-lambda-artefacts
-              - arn:aws:s3:::anki-lambda-artefacts/*
+            - '*'
           - Action:
             - cloudformation:*
             Effect: Allow
             Resource:
-              - '*'
+            - '*'
           - Action:
             - iam:*
             Effect: Allow
             Resource:
-              - '*'
+            - '*'
           - Action:
             - lambda:*
             Effect: Allow
             Resource:
-              - '*'
+            - '*'
           - Action:
             - apigateway:*
             Effect: Allow
             Resource:
-              - '*'
-  AssetsRole:
+            - '*'
+          - Action:
+            - tag:getResources
+            - tag:getTagKeys
+            - tag:getTagValues
+            - tag:TagResources
+            - tag:UntagResources
+            - resource-groups:*
+            Effect: Allow
+            Resource: '*'
+          - Action: applicationinsights:*
+            Effect: Allow
+            Resource: '*'
+          - Action:
+            - ec2:DescribeInstances
+            - ec2:DescribeVolumes
+            - rds:DescribeDBInstances
+            - rds:DescribeDBClusters
+            - sqs:ListQueues
+            - elasticloadbalancing:DescribeLoadBalancers
+            - elasticloadbalancing:DescribeTargetGroups
+            - elasticloadbalancing:DescribeTargetHealth
+            - autoscaling:DescribeAutoScalingGroups
+            - lambda:ListFunctions
+            - dynamodb:ListTables
+            - s3:ListAllMyBuckets
+            - sns:ListTopics
+            - states:ListStateMachines
+            - apigateway:GET
+            - ecs:ListClusters
+            - ecs:DescribeTaskDefinition
+            - ecs:ListServices
+            - ecs:ListTasks
+            - eks:ListClusters
+            - eks:ListNodegroups
+            - fsx:DescribeFileSystems
+            - logs:DescribeLogGroups
+            Effect: Allow
+            Resource: '*'
+          - Action:
+            - tag:getResources
+            - tag:getTagKeys
+            - tag:getTagValues
+            - tag:TagResources
+            - tag:UntagResources
+            - resource-groups:*
+            Effect: Allow
+            Resource:
+            - '*'
+    AssetsRole:
     Type: AWS::IAM::Role
     Properties:
       Description: !Sub Assets upload role for ${ProjectName} project

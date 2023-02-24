@@ -98,34 +98,34 @@ Resources:
             Effect: Allow
             Resource:
             - '*'
-    AssetsRole:
-    Type: AWS::IAM::Role
-    Properties:
-      Description: !Sub Assets upload role for ${ProjectName} project
-      RoleName: !Sub ${ProjectName}-assets-role
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Action:
-              - sts:AssumeRole
-            Principal:
-              AWS: !GetAtt AssetsUser.Arn
-            Condition:
-              StringEquals:
-                sts:ExternalId: !Ref ExternalId
-          - Effect: Allow
-            Action:
-              - sts:TagSession
-            Principal:
-              AWS: !GetAtt AssetsUser.Arn
-      ManagedPolicyArns:
-        - !Ref AssetsPolicy
-      Tags:
-        - Key: project
-          Value: !Ref ProjectName
-        - Key: stack
-          Value: !Ref AWS::StackName
+      AssetsRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Description: !Sub Assets upload role for ${ProjectName} project
+        RoleName: !Sub ${ProjectName}-assets-role
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - sts:AssumeRole
+              Principal:
+                AWS: !GetAtt AssetsUser.Arn
+              Condition:
+                StringEquals:
+                  sts:ExternalId: !Ref ExternalId
+            - Effect: Allow
+              Action:
+                - sts:TagSession
+              Principal:
+                AWS: !GetAtt AssetsUser.Arn
+        ManagedPolicyArns:
+          - !Ref AssetsPolicy
+        Tags:
+          - Key: project
+            Value: !Ref ProjectName
+          - Key: stack
+            Value: !Ref AWS::StackName
       
   AssetsUser:
     Type: AWS::IAM::User
